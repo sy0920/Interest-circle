@@ -1,8 +1,8 @@
-import { Inject, Controller, Get, Query } from '@midwayjs/core';
+import { Inject, Controller, Post, Body } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { UserService } from '../service/user.service';
 
-@Controller('/api')
+@Controller('/api/user')
 export class APIController {
   @Inject()
   ctx: Context;
@@ -10,9 +10,14 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Get('/get_user')
-  async getUser(@Query('uid') uid) {
-    const user = await this.userService.getUser({ uid });
-    return { success: true, message: 'OK', data: user };
+  @Post('/login')
+  async login(@Body() body) {
+    const { username } = body;
+    if (!username) {
+      return { success: false, message: 'Username cannot be empty' };
+    }
+    // Assuming userService.login just checks if the user exists
+    const result = await this.userService.login({ username });
+    return { success: true, message: 'Login successful', data: result };
   }
 }
