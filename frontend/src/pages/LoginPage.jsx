@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './style.css';
+import './login.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate(); // 初始化 useNavigate
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!username || !password) {

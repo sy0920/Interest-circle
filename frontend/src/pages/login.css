@@ -4,7 +4,12 @@
     margin: 0;
     padding: 0;
 }
-
+.h1{
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -112,7 +117,3 @@ body {
     margin-left: 10px;
 }
 
-.box .btn-box > div > button:hover {
-    border: 1px solid rgba(248, 108, 76,0.8);
-    background: rgba(248, 108, 76,0.5);
-}
