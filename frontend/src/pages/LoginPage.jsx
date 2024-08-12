@@ -1,39 +1,40 @@
 import React, { useState } from 'react';
-import './login.css';
+import './style.css';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const loginUser = (userInfo) => {
+    localStorage.setItem('user', JSON.stringify(userInfo));
+  };
   const navigate = useNavigate(); // 初始化 useNavigate
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!username || !password) {
-      setMessage('Username and password cannot be empty');
-      return;
+    console.log('Attempting to login with:', { username, password });
+    try {
+      const response = await axios.post('http://127.0.0.1:7001/api/user/login', { username, password },
+        {
+          headers: { 'Content-Type': 'application/json' }
+        });
+      if (response.status === 200 || response.data.user) {
+        console.log(response.data);
+        loginUser(response.data);
+        navigate('/home');
+      } else {
+        setError('Username and password cannot be empty');
+      }
+    } catch (err) {
+      setError('error! Please try again.');
     }
-    else {
-      navigate('/home'); // 跳转到主页
-    }
-    const response = await fetch('/api/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    });
-
-    const result = await response.json();
-    setMessage(result.message);
-  };
-
+  }
   return (
     <div className="box">
       <h2>用户登录</h2>
       <form onSubmit={handleLogin}>
         <div className="input-box">
-          <label htmlFor="username">账号</label>
+          <label htmlFor="username">用户名</label>
           <input
             type="text"
             id="username"
@@ -54,8 +55,8 @@ function Login() {
             required
           />
         </div>
-        <div className="btn-box">
-          <a href="#">忘记密码?</a>
+        <div className="btn-box" style={{ color: 'white' }}>
+          忘记密码?
           <div>
             <button type="submit">登录</button>
             <button type="button">注册</button>
