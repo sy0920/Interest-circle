@@ -33,14 +33,26 @@ export class CircleController {
   }
 
   @Post('/:id/join')
-  async joinCircle(@Param('id') id: number) {
-    // Implement logic to join circle
-    return { success: true };
+  async joinCircle(@Param('id') id: number, @Body() body: { userId: number }) {
+    const circle = await this.circleService.addMemberToCircle(id, body.userId);
+    return { success: true, circle };
   }
 
   @Get('/:id/posts')
   async getPosts(@Param('id') id: number) {
     return { data: await this.postService.getPostsByCircleId(id) };
+  }
+
+  @Get('/:circleId/post-counts')
+  async getCirclePostCounts(ctx) {
+    const circleId = parseInt(ctx.params.circleId, 10);
+    const postCounts = await this.circleService.calculateCirclePostCounts(circleId);
+    if (postCounts) {
+      ctx.body = postCounts;
+    } else {
+      ctx.status = 404;
+      ctx.body = 'Circle not found';
+    }
   }
 
 }
@@ -52,7 +64,7 @@ export const data = {
   ],
   circles: [
     { id: 1, name: '小说', members: [1, 2], posts: [1, 2] },
-    { id: 2, name: '美食', members: [2], posts: [3] },
+    { id: 2, name: '美食', members: [3], posts: [3] },
   ],
   posts: [
     {
@@ -84,7 +96,7 @@ export const data = {
       date: '2024/08/9',
       content: '古茗的柚子新品真的绝了！！都给我去喝！太清爽了',
       images: [
-        '../image/古茗.jpg'
+        '古茗.jpg'
       ],
       comments: [],
     },

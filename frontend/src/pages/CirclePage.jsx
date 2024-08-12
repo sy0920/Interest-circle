@@ -33,6 +33,10 @@ export default function CirclePage() {
     window.location.reload();
   }
 
+  function handleActivityPage() {
+    navigate(`/ActivityPage/${circleId}`)
+    window.location.reload();
+  }
   function handleBackToMainPage() {
     navigate('/home');
     window.location.reload();
@@ -42,6 +46,13 @@ export default function CirclePage() {
     <div style={{ background: 'none' }}>
       <div>
         <h1 style={{ marginTop: '90px' }} >{circle.name}</h1>
+        <button
+          style={{ marginTop: '10px', color: 'black' }}
+          onClick={handleActivityPage}
+          className="rounded-lg w-full p-3 border"
+        >
+          查看成员活跃度
+        </button>
         {posts.map(post => (
           <PostCard key={post.id} post={post} />
         ))}

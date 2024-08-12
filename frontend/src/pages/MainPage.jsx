@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 function MainPage() {
@@ -36,9 +36,22 @@ function MainPage() {
     }
   };
 
-  const enterCircle = (id) => {
-    console.log('用户进入兴趣圈:', id);
-    navigate(`/Circle/${id}`);
+  const joinCircle = async (id) => {
+    const storedUser = localStorage.getItem('user');
+    const user = JSON.parse(storedUser);
+    console.log('userid:', user.data.id);
+    if (user) {
+      await axios.post(`http://127.0.0.1:7001/circle/${id}/join`, { userId: user.data.id })
+        .then(response => {
+          console.log('Join Circle:', response.data);
+          navigate(`/Circle/${id}`);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    } else {
+      console.error('No user found in localStorage');
+    }
   };
 
   return (
@@ -47,18 +60,18 @@ function MainPage() {
       <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
         <input
           type="text"
-          style={{ width: '200px', height: '32px' }}
+          style={{ width: '200px', height: '34px' }}
           value={circleName}
           onChange={(e) => setCircleName(e.target.value)}
           placeholder="兴趣圈名称"
         />
-        <button type="submit" onClick={handleSubmit} style={{ width: '150px', height: '35px', marginTop: '15px', marginLeft: '10px' }}> 创建新兴趣圈 </button>
+        <button type="submit" onClick={handleSubmit} style={{ width: '150px', height: '38px', marginTop: '15px', marginLeft: '10px' }}> 创建新兴趣圈 </button>
       </form>
       <div style={{ marginTop: '20px' }}>
         {circles.map(circle => (
           <div key={circle.id}>
             <h2 style={{ color: 'white', fontSize: '24px' }}>{circle.name}</h2>
-            <button onClick={() => enterCircle(circle.id)}>进入</button>
+            <button onClick={() => joinCircle(circle.id)}>加入</button>
           </div>
         ))}
       </div>

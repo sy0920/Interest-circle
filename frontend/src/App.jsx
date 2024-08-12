@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import CirclePage from './pages/CirclePage';
 import PostForm from './pages/PostForm';
+import ActivityPage from './pages/ActivityPage';
 function App() {
   return (
     <Router>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/circle/:circleId" element={<CirclePage />} />
         <Route path="/PostForm/:circleId" element={<PostForm />} />
+        <Route path="/ActivityPage/:circleId" element={<ActivityPage />} />
       </Routes>
     </Router>
   );
