@@ -31,7 +31,6 @@ function MainPage() {
         .catch(error => {
           console.error('Error:', error);
         });
-      // setCircleName('');
       window.location.reload();
     }
   };

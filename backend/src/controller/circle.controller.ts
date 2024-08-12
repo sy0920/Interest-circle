@@ -47,6 +47,7 @@ export class CircleController {
   async getCirclePostCounts(ctx) {
     const circleId = parseInt(ctx.params.circleId, 10);
     const postCounts = await this.circleService.calculateCirclePostCounts(circleId);
+    console.log('postCounts: ', postCounts);
     if (postCounts) {
       ctx.body = postCounts;
     } else {
@@ -71,7 +72,7 @@ export const data = {
       id: 1,
       circleId: 1,
       writer: '小洛',
-      date: '2024/08/02',
+      date: '2024/8/2',
       content: '今天看了《洛希极限》，真的好浪漫！！',
       images: [
         '../image/洛希极限.png',
@@ -82,7 +83,7 @@ export const data = {
       id: 2,
       circleId: 1,
       writer: '小希',
-      date: '2024/08/05',
+      date: '2024/8/5',
       content: '今天四刷了《台风眼》，真的太有老电影的质感了，那种氛围感真的绝了！！！',
       images: [
         '../image/台风眼.jpg'

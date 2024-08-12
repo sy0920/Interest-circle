@@ -61,6 +61,23 @@ const PostCard = ({ post }) => {
           <img key={index} src={image} />
         ))}
       </div>
+      <div className="flex mt-3 items-center" style={{ color: 'black' }}>
+        <input
+          type="text"
+          value={newCommentText}
+          onChange={e => setNewCommentText(e.target.value)}
+          className="w-full border  p-2 rounded-lg"
+          placeholder="输入评论..."
+        />
+        <button style={{ color: 'black', marginLeft: '10px' }}
+          onClick={() => {
+            addComment(post.id, newCommentText);
+            setNewCommentText('');
+          }}
+          className="rounded-lg w-20"
+        >   发布
+        </button>
+      </div>
       <div>
         <h5 className="text-lg font-bold">评论</h5>
         {comments.map(comment => (
@@ -68,23 +85,7 @@ const PostCard = ({ post }) => {
             <p style={{ fontSize: '14px' }}>{comment.writer}: {comment.text}</p>
           </div>
         ))}
-        <div className="flex mt-3 items-center" style={{ color: 'black' }}>
-          <input
-            type="text"
-            value={newCommentText}
-            onChange={e => setNewCommentText(e.target.value)}
-            className="w-full border  p-3 rounded-lg"
-            placeholder="输入评论..."
-          />
-          <button style={{ color: 'black', marginLeft: '10px' }}
-            onClick={() => {
-              addComment(post.id, newCommentText);
-              setNewCommentText('');
-            }}
-            className="rounded-lg w-20"
-          >   发布
-          </button>
-        </div>
+
       </div>
     </div>
   );
