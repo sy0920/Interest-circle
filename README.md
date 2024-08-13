@@ -1,11 +1,30 @@
 # Interest-circle
-**Github Repository**
-https://github.com/sy0920/Interest-circle
-**打包产物运行方式**
-**前端**解压project.zip后，在dist文件夹内右键选择以终端形式打开，然后输入npm install -g serve指令以及serve -s ./即可运行前端。
-**后端**在解压得到的back文件夹内右键选择以终端形式打开，然后输入
-npm install -g pm2
-pm2 start ./bootstrap.js --name [backend]
-即可运行后端。
+要运行 **Interest-circle** 项目的打包产物，可以按照以下步骤进行：
+
+### 前端
+1. 解压 `project.zip`。
+2. 在 `dist` 文件夹内，右键选择“以终端形式打开”。
+3. 输入以下命令安装 `serve`：
+   ```bash
+   npm install -g serve
+   ```
+4. 运行前端：
+   ```bash
+   serve -s ./
+   ```
+
+### 后端
+1. 解压得到 `back` 文件夹。
+2. 在 `back` 文件夹内，右键选择“以终端形式打开”。
+3. 输入以下命令安装 `pm2`：
+   ```bash
+   npm install -g pm2
+   ```
+4. 运行后端：
+   ```bash
+   pm2 start ./bootstrap.js --name [backend]
+   ```
+
+这样，你的前后端应用就可以分别运行了。
 
 
