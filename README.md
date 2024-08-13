@@ -25,6 +25,6 @@
    pm2 start ./bootstrap.js --name [backend]
    ```
 
-这样，你的前后端应用就可以分别运行了。
+
 
 
