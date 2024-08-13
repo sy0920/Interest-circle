@@ -1,0 +1,13 @@
+module.exports = {
+  apps: [
+    {
+      name: 'my-app',
+      script: 'dist/server.js', // 你的服务器入口文件
+      instances: 'max',
+      exec_mode: 'cluster',
+      env: {
+        NODE_ENV: 'production',
+      },
+    },
+  ],
+};

@@ -14,8 +14,6 @@ export default {
     'session',
   ],
   cors: {
-    origin: 'http://localhost:5173', // 允许的来源
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowHeaders: ['Content-Type', 'Authorization'],
+    origin: '*',
   },
 } as MidwayConfig;
