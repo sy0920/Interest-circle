@@ -142,7 +142,7 @@ export default function CirclePage() {
           <PostCard key={post.id} post={post} />
         ))}
         <button onClick={handleCreatePost}>
-          发布帖子
+          创建帖子
         </button>
         <button onClick={handleBackToMainPage} style={{ marginLeft: '50px' }}>
           返回主页
