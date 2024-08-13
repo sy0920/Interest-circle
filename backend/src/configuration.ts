@@ -1,6 +1,6 @@
 import { Configuration, App } from '@midwayjs/core';
 import { corsMiddleware } from './middleware/cors.middleware';
-
+import * as crossDomain from '@midwayjs/cross-domain';
 import * as koa from '@midwayjs/koa';
 import * as validate from '@midwayjs/validate';
 import * as info from '@midwayjs/info';
@@ -18,6 +18,7 @@ import { ReportMiddleware } from './middleware/report.middleware';
       component: info,
       enabledEnvironment: ['local'],
     },
+    crossDomain
   ],
   importConfigs: [join(__dirname, './config')],
 })
@@ -28,7 +29,7 @@ export class MainConfiguration {
     // add middleware
     this.app.useMiddleware([ReportMiddleware]);
     this.app.use(cors({
-      origin: 'http://localhost:5173', // 允许的来源
+      origin: '*', // 允许的来源
       allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowHeaders: ['Content-Type', 'Authorization', 'user'],
     }));
