@@ -1,4 +1,6 @@
 # Interest-circle
+GitHub Repository: [https://github.com/sy0920/Interest-circle](https://github.com/sy0920/Interest-circle)
+
 要运行 **Interest-circle** 项目的打包产物，可以按照以下步骤进行：
 
 ### 前端
