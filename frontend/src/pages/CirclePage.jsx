@@ -51,15 +51,15 @@ const PostCard = ({ post }) => {
     <div style={{ marginTop: '20px' }} className="mb-8 p-3 border rounded-lg">
       <div className="flex mb-3 items-center ">
         <div>
-          <h4 className="text-lg font-bold">{post.writer}</h4>
+          <h2 className="text-lg font-bold">{post.writer}</h2>
           <p className="text-sm">{post.date}</p>
         </div>
       </div>
       <p className='border rounded-lg'>{post.content}</p>
       <div>
-        {post.images.map((image, index) => (
-          <img key={index} src={image} />
-        ))}
+        {post.images.map(function (image, index) {
+          return <img key={index} src={image} />;
+        })}
       </div>
       <div className="flex mt-3 items-center" style={{ color: 'black' }}>
         <input
@@ -67,7 +67,7 @@ const PostCard = ({ post }) => {
           value={newCommentText}
           onChange={e => setNewCommentText(e.target.value)}
           className="w-full border  p-2 rounded-lg"
-          placeholder="输入评论..."
+          placeholder="请输入评论..."
         />
         <button style={{ color: 'black', marginLeft: '10px' }}
           onClick={() => {
